@@ -12,3 +12,7 @@ These problems are training from geeksforgeeks practice (sudo placement), codefo
  * [CodeForces](https://codeforces.com/)
  * [Algorithms&DataStructure Specialization](https://www.coursera.org/specializations/data-structures-algorithms)
  * [HackerRank](https://www.hackerrank.com/)
+ 
+ ##languages
+ * c
+ * c++ (mostly)
