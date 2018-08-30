@@ -75,6 +75,9 @@ string closestPalindrome(string& s){
 /*                                  //Topological sort //            */
 // Constraints :* at every node its parents must be explored before
 //               * In topological sorting, we need to print a vertex before its adjacent vertice
+//              * O(V+E) where visiting every single V and check every single edge
+//              * BFS always returns an optimal answer, but this is not guaranteed for DFS.
+
 
 //if any child refers to its parent that creates a cycle
 //solution by stack and dfs method
@@ -164,31 +167,6 @@ void createTopTable(VecINT graph[], int N, map<int, int>& mp, STINT& st){
             st.push(i);
 }
 
-int * topoSort(vector<int> graph[], int N)
-{
-   static int* seq = new int[N];
-   int k=0;
-   stack<int> Stack;
-
-    // Mark all the vertices as not visited
-    bool *visited = new bool[N];
-    for (int i = 0; i < N; i++)
-        visited[i] = false;
-
-    for (int i = 0; i < N; i++)
-    if (visited[i] == false)
-        topologicalSortUtil(i, visited, Stack, graph);
-
-    while (Stack.empty() == false)
-        {
-            seq[k++] = Stack.top();
-            //cout<<Stack.top()<<"   ";
-            Stack.pop();
-        }
-    for(int i=0; i<6;i++)cout<<seq[i]<<" ";
-    return seq;
-
-}
 /*                                  //Alien Dictionary//             */
 /*                                    -----------------              */
 /*Description: Given a sorted dictionary of an alien language having N words and k starting alphabets of standard dictionary the task is to
@@ -271,4 +249,202 @@ string printOrder(string dict[], int N, int k)
   }
    return rs;
 }
+
+/*                              //Doctor strange
+                                    ------------
+Description: Kamar-taj is a place where "The Acient One" trains people to protect earth from other dimensions.
+----------- The earth is protected by 'n' sanctums, destroying any of it will lead to invasion on earth.
+            The sanctums are connected by 'm' bridges.
+            Now , you being on dormammu's side , want to finds no of sanctum destroying which will disconnect the sanctums.
+
+*/
+
+#define NIL -1
+
+
+// A class that represents an undirected graph
+class Graph
+{
+	int V; // No. of vertices
+	list<int> *adj; // A dynamic array of adjacency lists
+	void APUtil(int v, bool visited[], int disc[], int low[],
+				int parent[], bool ap[]);
+public:
+	Graph(int V); // Constructor
+	void addEdge(int v, int w); // function to add an edge to graph
+	void AP(); // prints articulation points
+};
+
+Graph::Graph(int V)
+{
+	this->V = V;
+	adj = new list<int>[V];
+}
+
+void Graph::addEdge(int v, int w)
+{
+	adj[v].push_back(w);
+	adj[w].push_back(v); // Note: the graph is undirected
+}
+
+void Graph::APUtil(int u, bool visited[], int disc[],
+									int low[], int parent[], bool ap[])
+{
+	// A static variable is used for simplicity, we can avoid use of static
+	// variable by passing a pointer.
+	static int time = 0;
+
+	// Count of children in DFS Tree
+	int children = 0;
+
+	// Mark the current node as visited
+	visited[u] = true;
+
+	// Initialize discovery time and low value
+	disc[u] = low[u] = ++time;
+
+	// Go through all vertices aadjacent to this
+	list<int>::iterator i;
+	for (i = adj[u].begin(); i != adj[u].end(); ++i)
+	{
+		int v = *i; // v is current adjacent of u
+
+		// If v is not visited yet, then make it a child of u
+		// in DFS tree and recur for it
+		if (!visited[v])
+		{
+			children++;
+			parent[v] = u;
+			APUtil(v, visited, disc, low, parent, ap);
+
+			// Check if the subtree rooted with v has a connection to
+			// one of the ancestors of u
+			//low[u] = min(low[u], low[v]);
+
+			// u is an articulation point in following cases
+
+			// (1) u is root of DFS tree and has two or more chilren.
+			if (parent[u] == NIL && children > 1)
+			ap[u] = true;
+
+			// (2) If u is not root and low value of one of its child is more
+			// than discovery value of u.
+			if (parent[u] != NIL && low[v] > disc[u])
+			ap[u] = true;
+		}
+
+		// Update low value of u for parent function calls.
+		else if (v != parent[u])
+			low[u] = min(low[u], disc[v]);
+	}
+}
+
+// The function to do DFS traversal. It uses recursive function APUtil()
+void Graph::AP()
+{
+	// Mark all the vertices as not visited
+	bool *visited = new bool[V];
+	int *disc = new int[V];
+	int *low = new int[V];
+	int *parent = new int[V];
+	bool *ap = new bool[V]; // To store articulation points
+
+	// Initialize parent and visited, and ap(articulation point) arrays
+	for (int i = 0; i < V; i++)
+	{
+		parent[i] = NIL;
+		visited[i] = false;
+		ap[i] = false;
+	}
+
+	// Call the recursive helper function to find articulation points
+	// in DFS tree rooted with vertex 'i'
+	for (int i = 0; i < V; i++)
+		if (visited[i] == false)
+			APUtil(i, visited, disc, low, parent, ap);
+
+	// Now ap[] contains articulation points, print them
+	int s=0;
+	for (int i = 0; i < V; i++)
+		if (ap[i] == true)
+			s++;
+	cout<<s<<endl;
+}
+
+
+//anther solution with more time complexity
+
+void dfs(vector<int> graph[], int n, set<int>& vs, int N){
+        vs.insert(n);
+
+        for(auto it=graph[n].begin(); it<graph[n].end(); it++){
+            if(vs.find(*it) == vs.end()){
+                dfs(graph, *it, vs, N);
+                break;
+            }
+        }
+}
+
+int findMaxDesSanctums(vector<int> graph[], int N){
+    int coun = 0;
+
+    for(int n=0; n<N; n++){
+        set<int> visited;
+        visited.insert(n);
+
+        if(graph[n].size() > 0)
+            dfs(graph, graph[n][0], visited, N);
+
+        if(visited.size()!=N) coun++;
+    }
+    return coun;
+}
+
+
+/*                      kill the captain of America
+                        ---------------------------
+Description:    Captain America is hiding from Thanos in a maze full of rooms.
+----------      The maze is designed in such a way that the room, within it, leads to another room via gate.
+                Captain America is hiding only in those rooms which are accessible directly/indirectly through every other room in the maze.
+                Further provided that, the movement from one room (R1) to another room (R2) is one way(unidirectional) only .
+                Now, you being on Thanos side, want to kill Captain America.
+------------
+
+*/
+//ma : is transpose graph
+//am : is the actual graph
+void dfs(unordered_map<ll,vector<ll>>&ma ,vector<bool> &visited,ll source)
+{
+    visited[source]=true;
+    for(ll adj : ma[source])
+    {
+        if(!visited[adj])
+            dfs(ma,visited ,adj);
+    }
+}
+
+ll kosaraju(ll n ,unordered_map<ll,vector<ll>>&ma,unordered_map<ll,vector<ll>>&am)
+{
+    vector<bool> visited (n);
+    ll mother =1;
+    for(ll i=1;i<n;i++)
+    {
+        if(!visited[i])
+        {
+            dfs(ma,visited,i);
+            mother = i;
+        }
+    }
+
+    fill(all(visited),false);
+    dfs(ma,visited,mother);
+    if(count(all(visited),true)!=n)
+        return 0;
+    fill(all(visited),false);
+    dfs(am,visited,mother);
+    return count(all(visited),true);
+}
+
+
+
 #endif // SUDO_PLACEMENT_ALGO_DS_H_INCLUDED
