@@ -446,5 +446,74 @@ ll kosaraju(ll n ,unordered_map<ll,vector<ll>>&ma,unordered_map<ll,vector<ll>>&a
 }
 
 
+/*                  largest number of other numbers  */
+//                  ----------------------------------
+int compare(int x, int y){
+    string n1 = to_string(x);
+    string n2 = to_string(y);
+    return (n1+n2 >= n2+n1)? 1 : 0;
+}
+
+void createNum(vector<int>& nums){
+    sort(nums.begin(), nums.end(), compare);
+}
+
+
+
+/*                  sort component according to frequencies      */
+//                  ---------------------------------------
+//note : If frequencies of two elements are same, print them in increasing order.
+//first solution
+void printmp(map<int, int>& mp){
+    map<int, int>::iterator mit;
+
+    while(true){
+        int maxv = 0;
+       for(auto it = mp.begin(); it!=mp.end(); it++){
+        if(it->second > maxv){
+            mit = it;
+            maxv = it->second;
+        }
+    }
+    //if all component is checked then break
+    if(maxv == 0) break;
+
+    for(int i=0; i<mit->second; i++)
+        cout<<mit->first<<' ';
+    mit->second = INT_MIN;
+
+    }
+}
+
+//second solution
+template<typename T1,typename T2>
+class Comparator {
+public:
+	bool operator ()(const std::pair<T1, T2> &a, const std::pair<T1, T2> &b) const {
+		return a.second > b.second;
+	}
+};
+
+class Solution {
+public:
+    string frequencySort(string str) {
+        std::map<char, int> mp;
+        std::string res;
+        for (auto c : str) {
+            mp[c]++;
+        }
+
+        std::vector<std::pair<char, int>> mapCopy(mp.begin(),mp.end());
+        sort(mapCopy.begin(),mapCopy.end(),Comparator<char,int>());
+
+        for (auto it : mapCopy) {
+            for (int i = 0; i < it.second; i++) {
+                res.push_back(it.first);
+            }
+        }
+
+        return res;
+    }
+};
 
 #endif // SUDO_PLACEMENT_ALGO_DS_H_INCLUDED
