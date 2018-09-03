@@ -516,4 +516,227 @@ public:
     }
 };
 
+
+/*                                            spiral traversal of matrix            */
+//                                            ---------------------------
+
+void spiral(int a[4][4],int m,int n)
+{
+
+    int i, k = 0, l = 0;
+    //k is the top row
+    //l is the left col
+    //n is the right col
+    //m is the bottom row
+
+    while (k < m && l < n){
+        //print the top row
+        for (i = l; i < n; ++i)
+            cout<<a[k][i]<<' ';
+        k++;
+
+       //print the right col
+        for (i = k; i < m; ++i)
+            cout<<a[i][n-1]<<' ';
+        n--;
+
+        //print the bottom row
+        for (i = n-1; i >= l; --i)
+            cout<<a[m-1][i]<<' ';
+        m--;
+
+        //print the left col
+        for (i = m-1; i >= k; --i)
+            cout<<a[i][l]<<' ';
+        l++;
+    }
+}
+
+
+/*                                  find the number of subsequence has multiplication less than K       */
+//                                  -------------------------------------------------------------
+int findSeqLessK(int a[], int n, ll k)
+{
+    int coun=0;
+    ll m = 1;
+
+    for(int j=0, i=0; i<n; i++){
+        if(j<i) j=i;
+        while(j<n && m*a[j]>0 && m*a[j]<k) m*=a[j++];
+        coun += j-i;
+        if(j>i) m/=a[i];
+    }
+    return coun;
+}
+
+/*                                      Coin Exchange      */
+/*                                  -----------------------
+Description : you have set of coins and want to find the number of ways to change N value with these coins
+--------
+*/
+
+//first solution:
+int count( int S[], int m, int n )
+{
+    //if n = 0 don't include any coins
+    if (n == 0)
+        return 1;
+
+    //n<0 no solution
+    if (n < 0)
+        return 0;
+
+    //set is empty you can change coins with n>0
+    if (m <=0 && n >= 1)
+        return 0;
+
+    //C({a0, a1, ...., an}, N) = c({a0, a1, ......., an}, N-an)+c({a0, a1, ......., an-1}, N);
+    return count( S, m - 1, n ) + count( S, m, n-S[m-1] );
+}
+
+//second solution
+int count( int S[], int m, int n )
+{
+    int i, j, x, y;
+
+    // We need n+1 rows as the table is constructed
+    // in bottom up manner using the base case 0
+    // value case (n = 0)
+    int table[n+1][m];
+
+    // Fill the enteries for 0 value case (n = 0)
+    for (i=0; i<m; i++)
+        table[0][i] = 1;
+
+    // Fill rest of the table entries in bottom
+    // up manner
+    for (i = 1; i < n+1; i++)
+    {
+        for (j = 0; j < m; j++)
+        {
+            // Count of solutions including S[j]
+            x = (i-S[j] >= 0)? table[i - S[j]][j]: 0;
+
+            // Count of solutions excluding S[j]
+            y = (j >= 1)? table[i][j-1]: 0;
+
+            // total count
+            table[i][j] = x + y;
+        }
+    }
+    return table[n][m-1];
+}
+
+/*                          make 2 strings anagram
+/*                          ---------------------
+Description:   you have 2 strings and want to make them anagram you can do that remove chars not in s1 but in s2 and vice versa we need to make the 2 strings
+-----------    have the same chars in any order
+*/
+int remAnagram(string str1, string str2)
+{
+    int coun = 0;
+    map<char, int> mp1, mp2;
+    for(size_t i=0; i<str1.length(); i++)
+        if(mp1.find(str1[i]) == mp1.end()) mp1[str1[i]] = 1;
+        else mp1[str1[i]]++;
+
+    for(size_t i=0; i<str2.length(); i++)
+        if(mp2.find(str2[i]) == mp2.end()) mp2[str2[i]] = 1;
+        else mp2[str2[i]]++;
+    //count characters that we need to remove from the two strings
+    for(auto it=mp1.begin(); it!=mp1.end(); it++)
+        if(mp2.find(it->first) == mp2.end())
+            coun+=it->second;
+        else{
+            coun += abs(it->second - mp2[it->first]);
+        }
+
+    for(auto it=mp2.begin(); it!=mp2.end(); it++)
+        if(mp1.find(it->first) == mp1.end())
+            coun+=it->second;
+
+    return coun;
+}
+
+/*                                          maximum bike speed    */
+/*                                          -------------------
+Description: we have N bikes and every bike has speed vi and acceleration ai we need to know after what hours the total speed of bikes that
+------------ exceed L speed will be greater than M speed
+
+solution : binary search algorith
+--------
+*/
+typedef struct biker
+{
+    long long sp;
+    long long ac;
+}biker;
+
+int helper(biker arr[],int t)
+{
+    long long temp=0;
+
+    for(int i=0;i<n;i++)
+    {
+        if(arr[i].sp+arr[i].ac*t>=l)
+        temp+=arr[i].sp+arr[i].ac*t;
+
+        if(temp>=m)
+        return 1;
+    }
+    return 0;
+}
+int MinHours(){
+    ll n, m, l;
+    cin>>n>>m>>l;
+	biker arr[n];
+	for(int i=0;i<n;i++)
+	cin>>arr[i].sp>>arr[i].ac;
+
+	int lo=0;
+	int hi=INT_MAX;
+
+	while(lo<hi)
+	{
+	    int mid=lo+(hi-lo)/2;
+	    if(helper(arr,mid))
+	    hi=mid;
+	    else
+	    lo=mid+1;
+	 }
+
+	cout<<lo<<endl;
+}
+
+/*                                  MAZE
+Description:                       ----
+-----------
+find how many paths and the longest path
+*/
+
+void solveMaze(int mat[1000][1000], int n){
+    path[0][0] = mat[0][0];
+    ways[0][0] = 1;
+
+    for(int i=0;i<n;++i)
+        for(int j=0;j<n;++j)
+        {
+            if(ways[i][j]==0)
+                continue;
+            if(mat[i][j]%2==1)
+            {
+                ways[i][j+1] = (ways[i][j]+ways[i][j+1])%rem;
+                path[i][j+1] = max(path[i][j]+mat[i][j+1],path[i][j+1]);
+            }
+            if(mat[i][j]>=2)
+            {
+                ways[i+1][j] = (ways[i][j]+ways[i+1][j])%rem;
+                path[i+1][j] = max(path[i][j]+mat[i+1][j],path[i+1][j]);
+            }
+        }
+        cout<<ways[n-1][n-1]<<' '<<path[n-1][n-1]<<'\n';
+    }
+}
+
 #endif // SUDO_PLACEMENT_ALGO_DS_H_INCLUDED
+
