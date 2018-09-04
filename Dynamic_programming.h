@@ -26,6 +26,15 @@ int minVal(int, int, int);
 int maxDivision(int, int);
 
 //******************************************************************************//
+//                              Coin Exchange
+//                              *************
 
+/* Description : this problem is a good example about dp (bottom up solution). we need to find how many ways we can exchange a value
+    -----------  with set of coins say {1, 2, 3} and value 5 {1,1,1,1,1}, {1,1,3}, {1,1,1,2}, {1,2,2}, {2,3}
+*/
+//first solution
+int coinExchange( int [], int, int);
+//dynamic programming solution
+int coinExchangeDp( int [], int, int);
 
 #endif // DYNAMIC_PROGRAMMING_H_INCLUDED
