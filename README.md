@@ -1,5 +1,5 @@
 # Competitve-Programming-Problems
-These problems are training from geeksforgeeks practice (sudo placement), codeforces, Algo&amp;Ds specialization (coursera)
+These problems are training from geeksforgeeks practice (sudo placement), codeforces, Algo&amp;Ds specialization (coursera), algorithms Design book, programming challenges book of skiena
 ## Motivation:
 * Take notes and keep them when solving problems is very important step in improving your programming skills.
   - increase your knowledge

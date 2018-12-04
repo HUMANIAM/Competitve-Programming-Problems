@@ -1,0 +1,48 @@
+									# Fibonancci series #
+									---------------------
+Formula of Fibonancci series
+---------------------------
+F(n) = * 0  					if n = 0
+	   * 1      				if n = 1
+	   * F(n-1) + F(n-2)		if n > 1
+
+* This is recursive task where computing F(n) requires calling F(n-1) and F(n-2), computing F(n-1) 	       requires calling F(n-2) and F(n-3). recursive calling increase exponantially approximately (1.62 ^ n)
+The constant 1.61803 is called Golden ratio. 
+
+
+* real applications : fibonancci number is around us everywhere in the nature 
+	---------------- - any two sequence numbers from series the smallest is in milemeter and the largest 						in kilometer
+
+					 - fibonancci prime is the number that belongs to the fab series and also prime
+					 	EX : 2 3 5 13 89 ...............
+					 	 they are ultimately connected by golen ration 2/1, 3/2, 5/3, 13/5 , 1.62
+
+					 - Zeckendorf's theorem : fibonancci numbers are complete theory where any number can 	--------------------	can be represented by sequence of numbers of fibonancci 							where there is no 2 consuctive numbers in the sequence from F
+					 							it is amazing 
+
+					 - there are so many other applications and features of fibonancci series
+
+
+*why Fibonancci take so much time to computed?
+---------------------------------------------
+- that is because there are so much redundant compution where as example to compute F(n) we call F(n-1) and F(n-2). F(n-1) will compute F(n-3) and F(n-2) which is already computed by F(n) 
+ex : to compute f(6) we compute f(5) > 1 , f(4) > 2, f(3) > 3, f(2) > 4 where in fact all we need is 		computing every number exactly once. we can do that by just storing the solutions of subproblems
+
+* complexity of fibonancii : there are so many ways to deduce the complexity time of fibonancci
+	--------------------- 
+	1- compute how many times leaves node are computed. you will find 1.62 ^ n
+	2- anthor way : 0 > 1, 1 > 2
+					what about n, we know its exponential where a^(n) = a^(n-1) + a^(n-2)
+					by dividing by a^(n-2) >> a^2 = a + 1 after solving the equation. you will get
+					(1(+/-)sqrt(5))/2. we care about positive 1.62 it is the golden ration
+
+					T(n) = T(n-1) + T(n-2) + O(1) >> T(n) = O(1.62^n)
+					----									--------
+	3- another way : T(n) = T(n-1) + T(n-2) + O(1)  and T(n-1) > T(n-2) so
+					 T(n) < 2*T(n-1) < 2*2*T(n-2) < ..........
+					 T(n) < 2^n  so T(n) = O(2^n) is roughly equal to 1.62^n
+
+
+* Another Way to compute fibonancci Numbers: (Binet’s formula)
+	---------------------------------------
+	F(n) = (1/sqrt(5)) * (((1+sqrt(5))/2)^n - ((1-sqrt(5))/2)^n)/(sqrt(5)*(2^n))
