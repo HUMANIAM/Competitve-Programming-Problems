@@ -12,6 +12,7 @@ These problems are training from geeksforgeeks practice (sudo placement), codefo
  * [CodeForces](https://codeforces.com/)
  * [Algorithms&DataStructure Specialization](https://www.coursera.org/specializations/data-structures-algorithms)
  * [HackerRank](https://www.hackerrank.com/)
+ * [OpenDSA](https://www.ida.liu.se/opendsa/OpenDSA/Books/Everything/html/)
  
  ## languages
  * c
