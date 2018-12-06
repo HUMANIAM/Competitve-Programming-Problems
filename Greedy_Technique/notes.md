@@ -23,22 +23,28 @@
 ### Examples:
 - __Find max number from list of digits__: find max digit in the list remove it from the list then append 												it the number
 
-2- __car fueling__: **Input**: A car which can travel at most L kilometers with full tank, a source
+- __car fueling__: 
+**Input**: A car which can travel at most L kilometers with full tank, a source
      				           point A, a destination point B and n gas stations at distances
 						      x1 ≤ x2 ≤ x3 ≤ · · · ≤ xn in kilometers from A along the path from A to B
 
 				 	**output** : The minimum number of refills to get from A to B, besides refill at A
 
-3- __Group children__ : Many children came to a celebration. Organize them into the minimum possible 							number of groups such that the age of any two children in the same group diffeer 							by at most one year.
+- __Group children__ : 
 
-					efficient algorithm : you can reformulate the to anthor problem whicht will be (find 					 the minimum number of segments of unit length to cover all points 						in a line) put the children into line then sort 
-										them and apply the constraint to group them this will take 
-										O(nlog(n)) for sorting and O(n) for the greedy algorithm 
+Many children came to a celebration. Organize them into the minimum possible 							number of groups such that the age of any two children in the same group diffeer by at most one year.
 
-4- __Fractional knapsack__ : **Input**: Weights w1, . .  wn and values v1, . . , vn of n items; capacity W 
-	 					     **Output**: The maximum total value of fractions of items that fit into a bag 				of capacity W .
+__efficient algorithm__ :
 
-						intuitive solution : sort Vi/Wi and select in a greedy way ther greater one by the 						greater one. complexity time is O(nlog(n))
+ you can reformulate the to anthor problem whicht will be (find the minimum number of segments of unit length to cover all points in a line) put the children into line then sort them and apply the constraint to group them this will take O(nlog(n)) for sorting and O(n) for the greedy algorithm.
+
+- __Fractional knapsack__ : 
+
+**Input**: Weights w1, . .  wn and values v1, . . , vn of n items; capacity W 
+**Output**: The maximum total value of fractions of items that fit into a bag of capacity W .
+
+**intuitive solution** : 
+sort Vi/Wi and select in a greedy way ther greater one by the greater one. complexity time is O(nlog(n))
 
 
 
