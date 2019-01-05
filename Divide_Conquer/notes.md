@@ -2,9 +2,7 @@
 
 ##A More General Divide-and-Conquer Approach
 
--  **Divide** : divide the given problem into subprobelms (ideally of approximately equall size)
--  **Conquer**: solve each subproblem (directly or recursively)
--  **Combine**: combine the solution of subproblems into global solution
+![General_picture](https://photos.google.com/photo/AF1QipM8V0Zz0rlYXBZC6f0Vq6yPTX80H69sMeIISmpO)
 
 
 ## Examples
