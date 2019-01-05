@@ -1,8 +1,9 @@
 # 									Divide and conquer
 
-##A More General Divide-and-Conquer Approach
 
-![General_picture](https://photos.google.com/photo/AF1QipM8V0Zz0rlYXBZC6f0Vq6yPTX80H69sMeIISmpO)
+## A More General Divide-and-Conquer Approach
+
+- ![General_pic](https://github.com/HUMANIAM/Competitve-Programming-Problems/blob/master/Divide_Conquer/general_picture.PNG)
 
 
 ## Examples
