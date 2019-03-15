@@ -12,6 +12,7 @@
 you divide the array into smaller sub arrays and sort them then you combine the sorted sub array with other sorted sub array. in average case this will take O(nlog(n))
 
 - **Polynomial Multiplication**
-you are given two vectors presents the coefficients of two equations A(x), B(x). size of every one of them is n and you need to find the result of the result vector of multiplying A and B.
-
+you are given two vectors presents the coefficients of two equations A(x), B(x). size of every one of them is n and you need to find the result of the result vector of multiplying A and B. It is a critical problem in Digital Signal Processing so we need to find an efficient algorithm to perform it.
+	- BruteForce approach : theta(n^2)
+	- divide and conquer approach : n^(lg(3)),FFT nlog(n) 
 

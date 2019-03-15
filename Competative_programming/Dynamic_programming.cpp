@@ -3,7 +3,7 @@
 #include <iostream>
 using namespace std;
 
-// Implementation of Ugly Number Founder //
+/**Ugly Number Founder */
 int maxDivision(int a, int b){
     while(a%b == 0)
         a/=b;
@@ -51,7 +51,7 @@ int findUglyNum_DB(int n){
     return uglies[n-1];
 }
 
-//implementation of coin exchange //
+/**coin exchange */
 //first solution:
 int coinExchange( int S[], int m, int n )
 {
@@ -103,6 +103,80 @@ int coinExchangeDp( int S[], int m, int n )
     }
     return table[n][m-1];
 }
-////////////////////////*******************************************////////////////////////////
 
+/** the minimum rest days*/
+int FindMininum_restDays(int* arr, int n){
+    int dp[n+1][3];
+    //initialize the array
+    for(int i=0; i<=n; i++)
+        for(int j=0; j<3; j++)
+            dp[i][j] = INT_MAX;
+    dp[0][2] = 0;
 
+    //apply dynamic programming for this problem we compute the first day and then next one
+    for(int i=1; i<=n; i++){
+        dp[i][2] = 1 + min(min(dp[i-1][0], dp[i-1][1]), dp[i-1][2]);
+        if(arr[i] == 1 || arr[i] == 3)
+            dp[i][0] = min(dp[i-1][1], dp[i-1][2]);
+
+        if(arr[i] == 2 || arr[i] == 3)
+            dp[i][1] = min(dp[i-1][0], dp[i-1][2]);
+    }
+    return min(min(dp[n][0], dp[n][1]), dp[n][2]);
+}
+
+/** K tree */
+const int D = 1e9 + 7;
+const int N = 111;
+int arr[N][N];
+
+int findPaths(int n, int k, int d){
+    //memset(arr, -1, sizeof(arr));
+    if(n==0 && d==0) return 1;
+    if(d > n || n<0) return 0;
+
+    if(arr[n][d] == -1){
+        arr[n][d] = 0;
+        for(int i=1; i<=k && i<=n; i++)
+            arr[n][d] = (arr[n][d] + findPaths(n-i, k, Map(i, d)))%D;
+    }
+    return arr[n][d];
+}
+
+// another idea
+void findPaths(){
+    int f[111][3];
+    int n, k, d;
+	f[0][0] = 1;
+	cin >> n >> k >> d;
+	for (int i = 0; i < n; i++)
+	for (int flag = 0; flag<=1; flag++)
+	if (f[i][flag]>0){
+		for (int next = 1; next <= k; next++){
+			int sum = i + next;
+			int nextflag = flag;
+			if (next >= d) nextflag = 1;
+			if (sum > n) continue;
+			f[sum][nextflag] += f[i][flag];
+			f[sum][nextflag] %= 1000000007;
+		}
+	}
+	cout << f[n][1] << endl;
+}
+
+/// flowers problem
+const int MAX=1e5+5;
+const int D = 1e9+7;
+int dp[MAX];
+int total[MAX];
+
+inline void Max_good_dinners(int k){
+    dp[0] = 1;
+    fora(i, 1, MAX){
+        dp[i] = (i < k)? 1 : (dp[i-1] + dp[i-k])%D;
+        total[i] = (total[i-1] + dp[i])%D;
+    }
+}
+inline int get_max_good_dinners(int i){
+    return total[i];
+}

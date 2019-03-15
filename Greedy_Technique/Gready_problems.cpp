@@ -3,7 +3,6 @@
 #include <queue>
 #include <string>
 #include <algorithm>
-//using namespace std;
 /** problems of greedy technique*/
 
 int changewith(int m, int coin, int& num){
@@ -125,4 +124,12 @@ string findMax_salary(const vector<string>& numbers, int n){
         pq_numbers.pop();
     }
     return res;
+}
+
+/** Heist */
+int findMinStolen_keyboards(int* arr, int n){
+    sort(arr, arr+n);
+    int minstolen = 0;
+    for(int i=0; i<n-1; i++) minstolen += arr[i+1] - arr[i] - 1;
+    return minstolen;
 }

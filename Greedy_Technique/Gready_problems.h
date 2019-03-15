@@ -112,4 +112,18 @@ struct Number{
         return isGreater(rhs.number, number);
     }
 };
+
+/**    Heist
+        ------
+Description :
+------------There was an electronic store heist last night.All keyboards which were in the store yesterday were
+numbered in ascending order from some integer number x. For example, if x=4 and there were 3 keyboardsin the store, then
+the devices had indices 4, 5 and 6, and if x=10 and there were 7 of them then the keyboards had indices 10, 11, 12, 13, 14, 15 and 16.
+After the heist, only n keyboards remain, and they have indices a1,a2,…,an. Calculate the minimum possible number of keyboards
+that have been stolen. The staff remember neither x nor the number of keyboards in the store before the heist.
+
+complexity time : O(nlogn)
+--------------
+*/
+int findMinStolen_keyboards(int*, int );
 #endif // GREADY_PROBLEMS_H_INCLUDED

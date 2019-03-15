@@ -1,5 +1,6 @@
 #ifndef DYNAMIC_PROGRAMMING_H_INCLUDED
 #define DYNAMIC_PROGRAMMING_H_INCLUDED
+#define Map(i, d) {(i >= d)? 0 : d}
 //*****************************************************************//
 //                      Ugly Number Founder
 //                      ********************
@@ -37,4 +38,27 @@ int coinExchange( int [], int, int);
 //dynamic programming solution
 int coinExchangeDp( int [], int, int);
 
+//****************************************************************
+
+/**                     K_tree problem
+                        **************
+Description : you have a tree where every node has exactly k children and every edge between parent and its child
+              kth has weight equal kth. you need to find how many paths has exactly cost equal n and where also
+              every one of them has at least one edge with weight >= d
+input : 1<= n, k<=100  1<= d <= k
+output : number of paths % (1e9 + 7) because it will be very large number
+*/
+int findPaths(int, int, int);
+void findPaths();
+
+/**
+                        Flowers
+                        ******
+Description : today ahmed decide to take dinner of red and white flowers and he want to make his dinner is
+------------  good dinner. he decide good dinner is dinner that has white flowers in k contigous order as
+an example if k = 2 then good dinner are R, RR, WW, RRR, WWR, RWW, RRRR, RRWW, WWRR, RWWR, but RWWW is not
+so you are given k and length of flowers and need to find the max numbers of ways he can take good dinner
+*/
+void Max_good_dinners(int);
+int get_max_good_dinners(int);
 #endif // DYNAMIC_PROGRAMMING_H_INCLUDED

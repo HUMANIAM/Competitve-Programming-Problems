@@ -2,7 +2,7 @@
 
 - the main Idea behind the greedy technique is making sure that any move will be safe that means this move 	will reach you to an optimal solution
 
-- how to make you choice is safe you need to do some computation like sort the input, normalize it, do 	    something that helps you to make you choices are safe. if you prove that your move can't be safe then 	you can try another technique like dp, backtracking, local search, sat solver ,........
+- how to make sure you choice is safe you need to do some computation like sort the input, normalize it, do something that helps you to make your choices are safe. if you prove that your move can't be safe then 	you can try another technique like dp, backtracking, local search, sat solver ,........
 
 - the next problems are training on the greedy technique to master where exactly it can be successful and where it can be failure. I need to find the main feature of the greedy technique.
 
@@ -28,7 +28,7 @@
      				           point A, a destination point B and n gas stations at distances
 						      x1 ≤ x2 ≤ x3 ≤ · · · ≤ xn in kilometers from A along the path from A to B
 
-				 	**output** : The minimum number of refills to get from A to B, besides refill at A
+**output** : The minimum number of refills to get from A to B, besides refill at A
 
 - __Group children__ : 
 
