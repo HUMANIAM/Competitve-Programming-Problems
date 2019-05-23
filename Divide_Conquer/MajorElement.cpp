@@ -42,7 +42,7 @@ MajorElment find_major_element(const vector<int>& elements, size_t left, size_t 
     else if (left == right)
         return MajorElment(elements[left], 1);
 
-    // divide the sublist int sublists
+    // divide the sublist into sublists
     int center = (right + left)/2;
 
     //find major element in the left part
@@ -54,7 +54,7 @@ MajorElment find_major_element(const vector<int>& elements, size_t left, size_t 
     //if major element in the left part = major element the right part then there is no
     //major element in the current sublist
     if(majorLeft.element == majorRight.element)
-        return MajorElment();
+        return MajorElment(majorLeft.element, majorLeft.occurrence + majorRight.occurrence);
 
     //if m1 != m2 then there is must one of them has majority over all the current list
     MajorElment me =  compare_majorities(elements, left, center, right, majorLeft, majorRight);
