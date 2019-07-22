@@ -10,6 +10,14 @@ Using dynamic programming requires two steps:
 2- tabulation the value of each subproblem must be stored in the table. we reverse the solutins 	to the subproblems from the starting point, and implement this by a simple loop.
 there is no mechanical way to get from the orginal recursive form to the dynamic programming form.`
 
+` When subProblems of the original problems are overlapping then dp is one of the possible
+  algorithms to the solve the problem.
+`
+
 ## Examples
 * Computing fibonacci numbers
-* Knapsack problem
+* Knapsack problem.
+* coin change problem
+* Edit distance
+* longest common subsequence
+* placing parenthesis 
